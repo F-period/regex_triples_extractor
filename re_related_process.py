@@ -15,10 +15,16 @@ def compile_regex_string(template_str_json):
         if type(value).__name__ == "list":
             template_json[key] = []
             for each_str in value:
-                each_pattern = re.compile(each_str)
+                try:
+                    each_pattern = re.compile(each_str)
+                except Exception:
+                    print("编译正则表达式 "+key+":"+each_str+" 出错，请仔细检查正则表达式语法。")
                 template_json[key].append(each_pattern)
         else:
-            pattern = re.compile(value)
+            try:
+                pattern = re.compile(value)
+            except Exception:
+                print("编译正则表达式 " + key + ":" + value + " 出错，请仔细检查正则表达式语法。")
             template_json[key] = pattern
     return template_json
 
