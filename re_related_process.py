@@ -16,13 +16,13 @@ def compile_regex_string(template_str_json):
             template_json[key] = []
             for each_str in value:
                 try:
-                    each_pattern = re.compile(each_str)
+                    each_pattern = re.compile(each_str, re.M)
                 except Exception:
                     print("编译正则表达式 "+key+":"+each_str+" 出错，请仔细检查正则表达式语法。")
                 template_json[key].append(each_pattern)
         else:
             try:
-                pattern = re.compile(value)
+                pattern = re.compile(value, re.M)
             except Exception:
                 print("编译正则表达式 " + key + ":" + value + " 出错，请仔细检查正则表达式语法。")
             template_json[key] = pattern
